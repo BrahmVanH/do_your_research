@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message } = require('../models');
+const { User, Post } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -74,7 +74,7 @@ const resolvers = {
 			return { token, user };
 		},
 		deleteUser: async (parent, { email, password }) => {
-			const user = await User.findOne({ username: username });
+			const user = await User.findOne({ email: email });
 
 			if (!user) {
 				throw new AuthenticationError('No user with that email.');
@@ -109,6 +109,8 @@ const resolvers = {
 				throw new Error('Something went wrong in creating new post');
 			}
 
+      const updatedUser = await User.findOneAndUpdate({ _id: postCreatorId }, { $addToSet: { posts: newPost._id }});
+
 			return newPost;
 		},
 		updatePostBody: async (parent, { postId, newPostBody }) => {
@@ -117,7 +119,7 @@ const resolvers = {
 			}
 
 			const updatedPost = await Post.findOneAndUpdate(
-				{ _id: postID },
+				{ _id: postId },
 				{ $set: { postBody: newPostBody } },
 				{
 					runValidators: true,
@@ -148,7 +150,7 @@ const resolvers = {
 				throw new Error('Missing post ID in delete post resolver');
 			}
 
-			const deletedPost = await Post.delete({ _id: postId });
+			const deletedPost = await Post.deleteOne({ _id: postId });
 
 			if (!deletedPost) {
 				throw new Error('Something went wrong in deleting post');

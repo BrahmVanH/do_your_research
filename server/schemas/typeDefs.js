@@ -5,6 +5,7 @@ typeDefs = gql`
 		_id: ID!
 		firstName: String!
 		lastName: String!
+		email: String!
 		username: String!
 		password: String!
 		age: Int!
@@ -14,15 +15,24 @@ typeDefs = gql`
 
 	type Post {
 		_id: ID!
-		postCreator: String!
+		postCreatorId: ID!
+		postCreatorUsername: String!
+		postTitle: String!
 		postBody: String!
 		createdAt: String!
 	}
 
-	input Post {
-		postCreator: String!
+	input PostInput {
+		postCreatorId: ID!
+		postCreatorUsername: String!
+		postTitle: String!
 		postBody: String!
 		createdAt: String!
+	}
+
+	type Auth {
+		user: User
+		token: ID!
 	}
 
 	type Query {
@@ -40,9 +50,9 @@ typeDefs = gql`
 			password: String!
 			age: Int!
 			bio: String!
-		): User!
+		): Auth
 		loginUser(email: String!, password: String!): Auth
-		deleteUser(email: ID!): User!
+		deleteUser(email: ID!, password: String!): User
 		createPost(
 			postCreatorId: ID!
 			postCreatorUsername: String!
@@ -54,3 +64,4 @@ typeDefs = gql`
 		deletePost(postId: ID!): Post!
 	}
 `;
+module.exports = typeDefs;

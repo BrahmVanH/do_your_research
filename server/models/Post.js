@@ -34,4 +34,4 @@ const messageSchema = new Schema(
 
 const Post = model('post', messageSchema);
 
-module.exports = Message;
+module.exports = Post;
