@@ -1,4 +1,4 @@
-<header class="masthead" style="background-image: url('assets/img/post-bg.jpg');">
+{/* <header class="masthead" style="background-image: url('assets/img/post-bg.jpg');">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -43,4 +43,4 @@
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/clean-blog.js"></script>
-</body>
+</body> */}

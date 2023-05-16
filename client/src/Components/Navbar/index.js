@@ -12,34 +12,39 @@ function Navbar () {
 
 
   return (
-		<nav className='navbar navbar-light navbar-expand-lg fixed-top' id='mainNav'>
+		<nav
+			className='navbar navbar-light navbar-expand-lg fixed-top'
+			id='mainNav'>
 			<div className='container'>
-				<a className='navbar-brand' href='index.html'>
+				<Link className='navbar-brand' to='/'>
 					DO YOUR RESEARCH
-				</a>
+				</Link>
 				<Button
 					data-bs-toggle='collapse'
 					data-bs-target='#navbarResponsive'
 					className='navbar-toggler'
 					aria-controls='navbarResponsive'
 					aria-expanded='false'
-					aria-label='Toggle navigation'>
-				</Button>
+					aria-label='Toggle navigation'></Button>
 				<div className='collapse navbar-collapse' id='navbarResponsive'>
 					<ul className='navbar-nav ms-auto'>
 						<li className='nav-item'>
-							<Link className='nav-link' href='index.html'>
+							<Link className='nav-link' to='/'>
 								Home
 							</Link>
 						</li>
 						<li className='nav-item'>
-							<Link className='nav-link' href='about.html'>
-								POSTS
+							<Link className='nav-link' to='/posts'>
+								Posts
 							</Link>
 						</li>
-						<li className='nav-item'></li>
 						<li className='nav-item'>
-							<Link className='nav-link' href='post.html'>
+							<Link className='nav-link' to='/about'>
+								About
+							</Link>
+						</li>
+						<li className='nav-item'>
+							<Link className='nav-link' to='/contact'>
 								Contact us
 							</Link>
 						</li>
@@ -49,3 +54,4 @@ function Navbar () {
 		</nav>
 	);
 }
+export default Navbar;

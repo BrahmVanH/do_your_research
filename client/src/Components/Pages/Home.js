@@ -1,23 +1,42 @@
-import React from 'react';
-import { Link } from "react-bootstrap/lib/Navbar";
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import { useQuery } from '@apollo/client';
+import { GET_ALL_POSTS } from '../../utils/queries';
+import PostPreview from '../Posts/PostPreivew';
+import Auth from '../../utils/auth';
 
 function Home() {
+
+    const [allPosts, setAllPosts] = useState({});
+
+    const userId = Auth.getProfile().data._id;
+
+    const allThem = useQuery(GET_ALL_POSTS);
+
+    console.log(allThem);
+
+    // useEffect(() => {
+    //     if(data && data.allPosts) {
+    //     setAllPosts(data.allPosts);
+    //     } else {
+    //         throw new Error('no data to set posts with');
+    //     }
+    // }, [data]);
+
+    console.log(allPosts);
+
+
   return (
   <div>
     
     <div className="container">
         <div className="row">
             <div className="col-md-10 col-lg-8">
-                <div className="post-preview"><Link to="#">
-                        <h2 className="post-title">Blog post title</h2>
-                    </Link>
-                    <p className="post-meta">Posted by&nbsp;<Link to="#">Start Bootstrap on September 24, 2018</Link></p>
-                    <div className="post-preview"><Link to="#">
-                            <h2 className="post-title">Blog post title</h2>
-                        </Link>
-                        <p className="post-meta">Posted by&nbsp;<a to="#">Start Bootstrap on September 24, 2018</Link></p>
-                    </div>
+                <div className="post-preview">
+                    <PostPreview
+                    key={userId}
+                    allPosts={allPosts}
+                    />
                 <div className="clearfix"><button className="btn btn-primary float-end" type="button">Older Posts&nbsp;⇒</button></div>
             </div>
         </div>
@@ -26,4 +45,6 @@ function Home() {
     </div>
     
   )
-}
+};
+
+export default Home;
